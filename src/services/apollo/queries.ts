@@ -30,8 +30,53 @@ export const QUERY_PRODUCT = gql`
     }
   }
 `;
+export const PRODUCT_TO_INPUT = gql`
+  input ProductInput {
+    id: ID
+    name: String
+    salePrice: String
+    quantity: Int
+    description: String
+    category: String
+    discountPercentage: Int
+    imageUrl: String
+    imageAlt: String
+  }
+`;
+export const PRODUCT_TO_CHECK = gql`
+  input ProductToCheck {
+    product: ProductInput
+    requiredQuantity: Int
+    sumProductInCart: Int
+  }
+`;
+
 export const MUTATION_CANCEL = gql`
   mutation CancelProductsInStock($cart: [CheckQuantity!]) {
     cancelProductsInStock(cart: $cart)
+  }
+`;
+export const MUTATION_CHECK_IN_STOCK = gql`
+  mutation CheckProductsInStock($cart: [ProductToCheck!]) {
+    checkProductsInStock(cart: $cart) {
+      inStock {
+        productId
+        requiredQuantity
+      }
+      notInStock {
+        product {
+          id
+          name
+          salePrice
+          quantity
+          category
+          description
+          discountPercentage
+          imageAlt
+          imageUrl
+        }
+        requiredQuantity
+      }
+    }
   }
 `;

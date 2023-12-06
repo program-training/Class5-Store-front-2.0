@@ -13,6 +13,10 @@ export type NotInStock = {
   product: ProductsCardInterface;
   requiredQuantity: number;
 };
+export type InStock = {
+  productId: number;
+  requiredQuantity: number;
+};
 
 export type NotInStockApterSub = {
   product: ProductsCardInterface;

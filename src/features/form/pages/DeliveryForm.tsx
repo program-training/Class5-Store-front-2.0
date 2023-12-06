@@ -4,24 +4,23 @@ import deliveryValidation from "../models/deliveryValidation";
 import DisplayFormContext from "../components/DisplayForm";
 import { Box, Button, CssBaseline, Modal, Typography } from "@mui/material";
 import { formStyle } from "../styles/formStyle";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { onSubmitHelper } from "../utils/convertToCartItem";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import CheckExist from "../../cart/components/CheckModal";
 import { styleModalCheck } from "../../layout/war/styleModal";
 import { NotInStockApterSub } from "../../../order/types/types";
+import useGraphql from "../../hooks/useGraphql";
 
 const DeliveryForm = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
+  const { onSubmitHelper } = useGraphql();
   const { state } = useLocation();
-  const cart = useAppSelector((store) => store.cart.cart);
   const [openMissing, setOpenMissing] = useState(false);
   const [listMissing, setListMissing] = useState<NotInStockApterSub[]>([]);
 
   const onSubmit = async (values: FieldValues) => {
     try {
-      const result = await onSubmitHelper(cart, values, state);
+      const result = await onSubmitHelper(values, state);
       if (result instanceof Array) {
         setListMissing(result);
         setOpenMissing(true);
