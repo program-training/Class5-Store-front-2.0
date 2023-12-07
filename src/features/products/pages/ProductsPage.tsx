@@ -25,6 +25,8 @@ const ProductsPage = () => {
   useEffect(() => {
     if (data) {
       setProducts(data.getProducts);
+      console.log(data.getProducts);
+
       const sale = products
         .filter((item) => item.discountPercentage > 0)
         .map((item) => item.id);

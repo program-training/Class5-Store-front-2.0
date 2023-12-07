@@ -47,7 +47,7 @@ export const PRODUCT_TO_CHECK = gql`
   input ProductToCheck {
     product: ProductInput
     requiredQuantity: Int
-    sumProductInCart: Int
+    sumProductInCart: String
   }
 `;
 
@@ -69,11 +69,11 @@ export const MUTATION_CHECK_IN_STOCK = gql`
           name
           salePrice
           quantity
-          category
           description
+          category
           discountPercentage
-          imageAlt
           imageUrl
+          imageAlt
         }
         requiredQuantity
       }

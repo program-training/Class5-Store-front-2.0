@@ -25,12 +25,21 @@ const useGraphql = () => {
       const decodedToken = jwtDecode(data) as TokenType;
       console.log(decodedToken);
 
+      const newCart = cartList.map((item) => {
+        return {
+          productId: item.product.id,
+          requiredQuantity: item.requiredQuantity,
+        };
+      });
+
       const checkCartRes = await checkInStock({
         variables: {
-          cart: cartList,
+          cart: newCart,
         },
       });
-      if (checkCartRes.data.notInStock.length) {
+      
+
+      if (checkCartRes.data.checkProductsInStock.notInStock.length) {
         const updatedNotInStock = ResultCalculation(
           checkCartRes.data.notInStock
         );
@@ -43,7 +52,7 @@ const useGraphql = () => {
         sum,
         decodedToken._id
       );
-      console.log(deliveryFormToSend);
+    
 
       const order = await axios.post(`${BASE_URL}/orders`, deliveryFormToSend);
       return order.data;
