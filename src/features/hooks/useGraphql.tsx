@@ -37,7 +37,7 @@ const useGraphql = () => {
           cart: newCart,
         },
       });
-      
+      console.log(checkCartRes);
 
       if (checkCartRes.data.checkProductsInStock.notInStock.length) {
         const updatedNotInStock = ResultCalculation(
@@ -52,7 +52,7 @@ const useGraphql = () => {
         sum,
         decodedToken._id
       );
-    
+      console.log(deliveryFormToSend);
 
       const order = await axios.post(`${BASE_URL}/orders`, deliveryFormToSend);
       return order.data;
