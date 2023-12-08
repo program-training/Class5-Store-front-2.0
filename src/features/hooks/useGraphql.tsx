@@ -37,7 +37,6 @@ const useGraphql = () => {
           cart: newCart,
         },
       });
-      console.log(checkCartRes);
 
       if (checkCartRes.data.checkProductsInStock.notInStock.length) {
         const updatedNotInStock = ResultCalculation(

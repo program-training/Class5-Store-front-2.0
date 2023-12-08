@@ -30,26 +30,6 @@ export const QUERY_PRODUCT = gql`
     }
   }
 `;
-export const PRODUCT_TO_INPUT = gql`
-  input ProductInput {
-    id: ID
-    name: String
-    salePrice: String
-    quantity: Int
-    description: String
-    category: String
-    discountPercentage: Int
-    imageUrl: String
-    imageAlt: String
-  }
-`;
-export const PRODUCT_TO_CHECK = gql`
-  input ProductToCheck {
-    product: ProductInput
-    requiredQuantity: Int
-    sumProductInCart: String
-  }
-`;
 
 export const MUTATION_CANCEL = gql`
   mutation CancelProductsInStock($cart: [CheckQuantity!]) {
